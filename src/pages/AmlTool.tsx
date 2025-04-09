@@ -1,259 +1,263 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, FileText, Shield, AlertCircle, Database } from 'lucide-react';
+import { ArrowLeft, CheckCircle, BarChart3, ShieldCheck, Users, ArrowRight, Clock, Zap, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Layout/Navbar';
 import Footer from '@/components/Layout/Footer';
 import WaitlistForm from '@/components/Home/WaitlistForm';
+import { Animate } from '@/components/ui/animate';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-const AmlTool: React.FC = () => {
+const AMLTool: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0.8]);
+
   useEffect(() => {
-    document.title = "AML Tool | EOB Capital";
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-            entry.target.classList.remove('opacity-0');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-        observer.unobserve(el);
-      });
+    const handleScroll = () => {
+      if (mainRef.current) {
+        const scrollPosition = window.scrollY;
+        setIsScrolled(scrollPosition > 100);
+      }
     };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const features = [
+  useEffect(() => {
+    document.title = "AML Tool | EOB Capital";
+  }, []);
+
+  const performanceMetrics = [
     {
-      title: "Agent 1 – Document Processor",
-      description: "Extracts structured text from uploaded compliance docs (passports, UBO forms, source of funds). AI-based OCR with multi-language support (EN/FR/DE).",
-      icon: <FileText size={32} className="text-golden" />
+      title: "80% Faster Onboarding",
+      description: "Reduce client onboarding time from days to hours with our automated compliance checks",
+      icon: <Clock size={32} className="text-golden" />
     },
     {
-      title: "Agent 2 – Risk Engine",
-      description: "Assigns low/medium/high scores based on FATF lists, nationality, structure complexity. Fully customizable weight model.",
-      icon: <AlertCircle size={32} className="text-golden" />
+      title: "95% Accuracy Rate",
+      description: "Industry-leading accuracy in document verification and risk assessment",
+      icon: <Target size={32} className="text-golden" />
     },
     {
-      title: "Agent 3 – Identity & Geolocation Verifier",
-      description: "Uses telecom API and location services to verify device match + address match.",
-      icon: <Shield size={32} className="text-golden" />
-    },
-    {
-      title: "Agent 4 – Transaction Monitor",
-      description: "AML alert scoring on first deposit + ongoing transactions. CSSF Circular 12-02 compliant thresholds.",
-      icon: <Database size={32} className="text-golden" />
-    },
-    {
-      title: "Agent 5 – Compliance Workflow Manager",
-      description: "Triggers document requests, validates onboarding steps, logs audit trails. CSSF Circular 20/747-aligned onboarding orchestration.",
-      icon: <CheckCircle size={32} className="text-golden" />
+      title: "60% Cost Reduction",
+      description: "Significant savings in compliance operations and manual review processes",
+      icon: <BarChart3 size={32} className="text-golden" />
     }
   ];
 
-  const regulations = [
-    "GDPR-compliant storage (data minimization, encryption at rest)",
-    "AMLD5 & AMLD6",
-    "CSSF Circular 18/698 + 20/747"
+  const keyBenefits = [
+    {
+      title: "Seamless Integration",
+      description: "Plug-and-play solution that integrates with your existing systems in under 24 hours",
+      icon: <Zap size={24} className="text-golden" />
+    },
+    {
+      title: "Real-time Monitoring",
+      description: "Continuous compliance monitoring with instant alerts for potential risks",
+      icon: <ShieldCheck size={24} className="text-golden" />
+    },
+    {
+      title: "Enhanced Client Experience",
+      description: "Frictionless onboarding process that keeps your clients engaged",
+      icon: <Users size={24} className="text-golden" />
+    }
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-ivory-200 text-navy-700">
+    <div className="min-h-screen flex flex-col bg-navy-700 text-white">
       <Navbar />
       
-      <main className="flex-grow pt-24">
+      <motion.main 
+        ref={mainRef}
+        className="flex-grow pt-24"
+        style={{ opacity }}
+      >
         {/* Back to home */}
         <div className="container max-w-6xl mx-auto px-6 mb-8">
-          <Link 
-            to="/" 
-            className="inline-flex items-center text-navy-600 hover:text-golden transition-colors"
-          >
-            <ArrowLeft size={16} className="mr-2" />
-            Back to home
-          </Link>
+          <Animate type="slideIn">
+            <Link 
+              to="/" 
+              className="inline-flex items-center text-ivory-200 hover:text-golden transition-colors"
+            >
+              <ArrowLeft size={16} className="mr-2" />
+              Back to home
+            </Link>
+          </Animate>
         </div>
 
         {/* Hero Section */}
-        <section className="py-12 px-6">
+        <section className="py-20 px-6">
           <div className="container max-w-6xl mx-auto">
-            <div className="floating-card p-10 max-w-3xl animate-on-scroll opacity-0">
-              <div className="brand-title mb-8">
-                <span className="main">EOB</span>
-                <span className="sub">Capital</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-garamond text-navy-700 mb-6">
-                A New Standard in AML Onboarding
-              </h1>
-              <p className="text-xl text-navy-600 mb-8">
-                Designed in Luxembourg for EU-regulated institutions.
-              </p>
-              <div className="h-0.5 w-24 bg-golden mb-8 shadow-glow-sm"></div>
-              <div className="flex flex-wrap gap-4">
-                <Button 
-                  className="bg-golden hover:bg-golden-600 text-white"
-                >
-                  Request Demo
+            <div className="max-w-3xl">
+              <Animate type="slideIn" delay={0.2}>
+                <h1 className="text-4xl md:text-5xl font-garamond mb-6">
+                  Transform Your AML Compliance
+                </h1>
+                <p className="text-xl text-ivory-200 mb-8">
+                  Experience the future of compliance with our AI-powered AML solution. Join the select group of financial institutions revolutionizing their compliance operations.
+                </p>
+                <Button size="lg" className="bg-golden-600 hover:bg-golden-700 group">
+                  Request Early Access
+                  <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-navy-600 text-navy-700 hover:bg-navy-50"
-                  asChild
-                >
-                  <a href="#waitlist">Join Friends & Family Early Access</a>
-                </Button>
+              </Animate>
+            </div>
+          </div>
+        </section>
+
+        {/* Performance Metrics */}
+        <section className="py-20 px-6">
+          <div className="container max-w-6xl mx-auto">
+            <Animate type="slideIn" delay={0.3}>
+              <h2 className="text-3xl font-garamond text-white mb-12 text-center">
+                Industry-Leading Performance
+              </h2>
+            </Animate>
+            <div className="grid md:grid-cols-3 gap-8">
+              {performanceMetrics.map((metric, index) => (
+                <Animate key={index} type="slideIn" delay={0.4 + index * 0.1}>
+                  <div className="p-8 bg-white/10 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all hover:bg-white/20 border border-white/10">
+                    <div className="text-golden mb-4">
+                      {metric.icon}
+                    </div>
+                    <h3 className="text-2xl font-garamond text-white mb-4">{metric.title}</h3>
+                    <p className="text-ivory-200/90">{metric.description}</p>
+                  </div>
+                </Animate>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Key Benefits */}
+        <section className="py-20 px-6">
+          <div className="container max-w-6xl mx-auto">
+            <div className="p-10 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10">
+              <Animate type="slideIn" delay={0.3}>
+                <h2 className="text-3xl font-garamond text-white mb-12 text-center">
+                  Why Choose Our Solution
+                </h2>
+              </Animate>
+              <div className="grid md:grid-cols-3 gap-8">
+                {keyBenefits.map((benefit, index) => (
+                  <Animate key={index} type="slideIn" delay={0.4 + index * 0.1}>
+                    <div className="p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/30 transition-all">
+                      <div className="text-golden mb-4">
+                        {benefit.icon}
+                      </div>
+                      <h3 className="text-xl font-medium text-white mb-2">{benefit.title}</h3>
+                      <p className="text-ivory-200/90">{benefit.description}</p>
+                    </div>
+                  </Animate>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-16 px-6">
+        {/* Early Access Section */}
+        <section className="py-20 px-6">
           <div className="container max-w-6xl mx-auto">
-            <div className="floating-card p-10">
-              <h2 className="text-3xl font-garamond text-navy-700 mb-12 animate-on-scroll opacity-0 relative">
-                <span className="relative z-10">What It Does</span>
-                <span className="absolute w-24 h-1 bg-golden bottom-0 left-0 z-0"></span>
-              </h2>
+            <div className="relative overflow-hidden rounded-2xl">
+              {/* Background Elements - Enhanced Layering */}
+              <div className="absolute inset-0">
+                {/* Base Layer - Subtle Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-navy-700/80 to-navy-800/80 rounded-2xl"></div>
+                
+                {/* Middle Layer - Golden Orbs */}
+                <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-golden/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
+                <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-golden/5 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 opacity-50"></div>
+                
+                {/* Top Layer - Accent Highlights */}
+                <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-golden/10 rounded-full blur-3xl opacity-30"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-golden/10 rounded-full blur-3xl opacity-30"></div>
+              </div>
 
-              <div className="space-y-10">
-                {features.map((feature, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-white p-8 border border-ivory-300 animate-on-scroll opacity-0 luxury-card shadow-card"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="flex flex-col md:flex-row md:items-start gap-6">
-                      <div className="flex-shrink-0 p-4 bg-ivory-100 rounded-sm">
-                        {feature.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-garamond font-medium text-navy-700 mb-3">
-                          {feature.title}
-                        </h3>
-                        <p className="text-navy-600">
-                          {feature.description}
+              {/* Content */}
+              <div className="relative">
+                <div className="grid md:grid-cols-2 gap-12 items-center p-12">
+                  {/* Left Column - Text Content */}
+                  <div className="space-y-8">
+                    <Animate type="slideIn" delay={0.3}>
+                      <div className="space-y-4">
+                        <span className="inline-block px-4 py-2 bg-golden/10 text-golden rounded-full text-sm font-medium backdrop-blur-sm border border-golden/20">
+                          Limited Time Offer
+                        </span>
+                        <h2 className="text-4xl font-garamond text-white">
+                          Join the Future of Compliance
+                        </h2>
+                        <p className="text-xl text-ivory-200/90">
+                          Be among the first to experience our revolutionary AML solution. Early adopters receive exclusive benefits and priority support.
                         </p>
                       </div>
+                    </Animate>
+
+                    <Animate type="slideIn" delay={0.4}>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 text-ivory-200/90 group">
+                          <div className="p-2 bg-golden/10 rounded-full group-hover:bg-golden/20 transition-colors">
+                            <CheckCircle size={20} className="text-golden" />
+                          </div>
+                          <span>Priority access to new features</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-ivory-200/90 group">
+                          <div className="p-2 bg-golden/10 rounded-full group-hover:bg-golden/20 transition-colors">
+                            <CheckCircle size={20} className="text-golden" />
+                          </div>
+                          <span>Dedicated onboarding support</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-ivory-200/90 group">
+                          <div className="p-2 bg-golden/10 rounded-full group-hover:bg-golden/20 transition-colors">
+                            <CheckCircle size={20} className="text-golden" />
+                          </div>
+                          <span>Exclusive pricing for early adopters</span>
+                        </div>
+                      </div>
+                    </Animate>
+                  </div>
+
+                  {/* Right Column - Form */}
+                  <Animate type="scaleIn" delay={0.5}>
+                    <div className="relative">
+                      {/* Form Background Layers */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-golden/20 to-transparent rounded-2xl blur-xl opacity-50"></div>
+                      <div className="absolute inset-0 bg-gradient-to-tr from-navy-700/50 to-transparent rounded-2xl"></div>
+                      
+                      {/* Form Container */}
+                      <div className="relative p-8 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl">
+                        <div className="mb-6">
+                          <h3 className="text-2xl font-garamond text-white mb-2">
+                            Request Early Access
+                          </h3>
+                          <p className="text-ivory-200/90">
+                            Join our exclusive early access program today
+                          </p>
+                        </div>
+                        <WaitlistForm 
+                          productName="AML Tool" 
+                          buttonVariant="default" 
+                          className="bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors rounded-2xl"
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Compliance Flow */}
-        <section className="py-16 px-6">
-          <div className="container max-w-6xl mx-auto">
-            <div className="floating-card p-10">
-              <div className="max-w-3xl mx-auto text-center mb-12 animate-on-scroll opacity-0">
-                <h2 className="text-3xl font-garamond text-navy-700 mb-4">
-                  Interactive Compliance Flow
-                </h2>
-                <p className="text-navy-600">
-                  Seamless integration of document processing, risk scoring, and workflow automation.
-                </p>
-              </div>
-
-              <div className="relative py-8 animate-on-scroll opacity-0">
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-start text-center md:text-left">
-                  <div className="mb-8 md:mb-0 p-6 bg-white border border-ivory-300 rounded-sm w-full md:w-48 shadow-card glow-effect">
-                    <h3 className="text-lg font-medium mb-2 text-navy-700">UBO Upload</h3>
-                    <p className="text-sm text-navy-600">Document collection from beneficial owners</p>
-                  </div>
-
-                  <div className="mb-8 md:mb-0 p-6 bg-white border border-ivory-300 rounded-sm w-full md:w-48 shadow-card glow-effect">
-                    <h3 className="text-lg font-medium mb-2 text-navy-700">Document Parsing</h3>
-                    <p className="text-sm text-navy-600">AI-powered extraction of critical data points</p>
-                  </div>
-
-                  <div className="mb-8 md:mb-0 p-6 bg-white border border-ivory-300 rounded-sm w-full md:w-48 shadow-card glow-effect">
-                    <h3 className="text-lg font-medium mb-2 text-navy-700">Risk Scoring</h3>
-                    <p className="text-sm text-navy-600">Comprehensive analysis based on multiple factors</p>
-                  </div>
-
-                  <div className="p-6 bg-white border border-ivory-300 rounded-sm w-full md:w-48 shadow-card glow-effect">
-                    <h3 className="text-lg font-medium mb-2 text-navy-700">Workflow Trigger</h3>
-                    <p className="text-sm text-navy-600">Automated actions based on risk assessment</p>
-                  </div>
+                  </Animate>
                 </div>
-                
-                {/* Connecting line */}
-                <div className="hidden md:block absolute top-1/2 left-[60px] right-[60px] h-0.5 bg-ivory-400 -translate-y-1/2 z-0">
-                  <div className="absolute top-1/2 left-1/4 w-3 h-3 rounded-full bg-golden -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></div>
-                  <div className="absolute top-1/2 left-2/4 w-3 h-3 rounded-full bg-golden -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></div>
-                  <div className="absolute top-1/2 left-3/4 w-3 h-3 rounded-full bg-golden -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></div>
-                </div>
-              </div>
 
-              <div className="mt-12 text-center animate-on-scroll opacity-0">
-                <Button variant="outline" className="border-golden text-golden hover:bg-golden-50">
-                  View Developer Documentation
-                </Button>
+                {/* Decorative Elements - Enhanced */}
+                <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-golden/5 rounded-full blur-3xl opacity-30"></div>
+                <div className="absolute -top-8 -left-8 w-48 h-48 bg-golden/5 rounded-full blur-3xl opacity-30"></div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Regulatory Alignment */}
-        <section className="py-16 px-6">
-          <div className="container max-w-6xl mx-auto">
-            <div className="floating-card p-10 bg-white shadow-floating">
-              <h2 className="text-3xl font-garamond mb-8 animate-on-scroll opacity-0 text-navy-700">
-                Regulatory Alignment
-              </h2>
-
-              <div className="space-y-4">
-                {regulations.map((reg, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-center gap-3 p-4 bg-ivory-100 border border-ivory-300 animate-on-scroll opacity-0 luxury-card"
-                    style={{ animationDelay: `${index * 200}ms` }}
-                  >
-                    <CheckCircle size={20} className="text-golden flex-shrink-0" />
-                    <span className="text-navy-700">{reg}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-ivory-300 animate-on-scroll opacity-0">
-                <p className="text-navy-600 opacity-90">
-                  EOB Capital's AML Tool is built from the ground up with European regulatory frameworks in mind, ensuring that your compliance processes are always aligned with the latest directives.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Waitlist Section */}
-        <section id="waitlist" className="py-16 px-6">
-          <div className="container max-w-6xl mx-auto">
-            <div className="max-w-xl mx-auto animate-on-scroll opacity-0">
-              <div className="floating-card p-8">
-                <h2 className="text-3xl font-garamond text-navy-700 mb-6 text-center">
-                  Friends & Family Early Access
-                </h2>
-                <WaitlistForm productName="AML Tool" />
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      </motion.main>
       
       <Footer />
     </div>
   );
 };
 
-export default AmlTool;
+export default AMLTool;
