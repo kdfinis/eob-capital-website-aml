@@ -27,7 +27,7 @@ const Index: React.FC = () => {
     });
 
     // Set document title
-    document.title = "EOB Capital | Regulatory Infrastructure for Capital";
+    document.title = "EOB CAPITAL | Regulatory Infrastructure for Capital";
     
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {

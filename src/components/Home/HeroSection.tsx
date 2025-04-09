@@ -35,9 +35,8 @@ const HeroSection: React.FC = () => {
       id="hero" 
       className="relative min-h-screen flex items-center justify-center py-20 px-6 overflow-hidden bg-ivory-200"
     >
-      {/* Background with subtle zoom effect */}
+      {/* Clean background with subtle gradient */}
       <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2069')] bg-cover bg-center opacity-10 scale-105 animate-[zoomEffect_20s_ease-in-out_infinite]" />
         <div className="absolute inset-0 bg-gradient-radial from-golden-400/10 to-transparent"></div>
       </div>
       
@@ -45,8 +44,8 @@ const HeroSection: React.FC = () => {
         <div className="floating-card max-w-3xl mx-auto text-center space-y-8 stagger-animation">
           <div className="mb-8 flex justify-center">
             <div className="brand-title">
-              <span className="main">EOB</span>
-              <span className="sub">Capital</span>
+              <span className="main font-normal">EOB</span>
+              <span className="sub font-normal text-[0.7rem] tracking-wider">CAPITAL</span>
             </div>
           </div>
           
@@ -58,7 +57,7 @@ const HeroSection: React.FC = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-navy-600 mt-6 max-w-2xl mx-auto">
-            EOB Capital builds compliance and regulatory infrastructure for institutional funds and pension platforms across Europe.
+            EOB CAPITAL builds compliance and regulatory infrastructure for institutional funds and pension platforms across Europe.
           </p>
           
           <div className="pt-8">

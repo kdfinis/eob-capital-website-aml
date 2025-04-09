@@ -185,15 +185,15 @@
 }
 
 .brand-title .main {
-  font-weight: 600;
   font-size: 1.5rem;
   color: #D4B98A;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .brand-title .sub {
-  font-weight: 400;
-  font-size: 0.8rem;
   margin-top: -0.25rem;
+  text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #22304A;
 }

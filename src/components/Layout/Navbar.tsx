@@ -48,15 +48,15 @@ const Navbar: React.FC = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-12",
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-white"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div>
           <Link to="/" className="flex items-center">
             <div className="brand-title">
-              <span className="main">EOB</span>
-              <span className="sub">Capital</span>
+              <span className="main font-normal">EOB</span>
+              <span className="sub font-normal text-[0.7rem] tracking-wider">CAPITAL</span>
             </div>
           </Link>
         </div>
