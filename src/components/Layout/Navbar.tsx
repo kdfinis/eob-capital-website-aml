@@ -3,12 +3,26 @@ import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
+import { 
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger
+} from "@/components/ui/navigation-menu";
 
 const NAV_ITEMS = [
   { label: "Home", href: "#hero" },
-  { label: "Products", href: "#products" },
   { label: "About", href: "#vision" },
   { label: "Insights", href: "#regulatory" },
+];
+
+const PRODUCTS = [
+  { label: "AML Tool", href: "/aml-tool", description: "Regulatory compliance and AML onboarding" },
+  { label: "PEPP", href: "/pepp", description: "Pan-European Pension Product" },
+  { label: "ELTIF", href: "/eltif", description: "European Long-Term Investment Fund" },
 ];
 
 const Navbar: React.FC = () => {
@@ -40,34 +54,63 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div>
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-garamond font-medium text-burgundy-800">
-              EOB CAP
-            </span>
+            <div className="brand-title">
+              <span className="main">EOB</span>
+              <span className="sub">Capital</span>
+            </div>
           </Link>
         </div>
         
-        <nav className="hidden md:flex gap-8">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => scrollToSection(item.href)}
-              className="font-inter text-slate-800 hover:text-burgundy-800 transition-colors hover-underline py-2"
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            {NAV_ITEMS.map((item) => (
+              <NavigationMenuItem key={item.label}>
+                <button
+                  onClick={() => scrollToSection(item.href)}
+                  className="font-inter text-navy-700 hover:text-golden-600 transition-colors hover-underline py-2 px-4"
+                >
+                  {item.label}
+                </button>
+              </NavigationMenuItem>
+            ))}
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="font-inter text-navy-700 hover:text-golden-600">
+                Products
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4">
+                  {PRODUCTS.map((product) => (
+                    <li key={product.label}>
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to={product.href}
+                          className="block select-none space-y-1 rounded-md p-3 hover:bg-ivory-100 transition-colors"
+                        >
+                          <div className="text-sm font-medium text-navy-700">{product.label}</div>
+                          <p className="line-clamp-2 text-xs text-muted-foreground">
+                            {product.description}
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
         <div className="flex items-center gap-4">
           <Button 
             variant="ghost" 
-            className="font-medium text-slate-700 hover:text-burgundy-800"
+            className="font-medium text-navy-700 hover:text-golden"
           >
             Login
           </Button>
           <Button 
             variant="outline" 
-            className="border-burgundy-800 text-burgundy-800 hover:bg-burgundy-800 hover:text-ivory-200"
+            className="border-golden text-golden hover:bg-golden-100 hover:text-golden-700"
           >
             Request Demo
           </Button>

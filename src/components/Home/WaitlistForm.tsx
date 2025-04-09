@@ -39,8 +39,8 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
   };
 
   return (
-    <div className={`bg-dark-800 border border-dark-700 p-6 rounded-sm ${className}`}>
-      <h3 className="text-xl font-garamond text-light-300 mb-4">
+    <div className={`${className}`}>
+      <h3 className="text-xl font-garamond text-navy-700 mb-4">
         {productName ? `Join ${productName} Early Access` : "Join Our Waitlist"}
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -51,7 +51,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="bg-dark-700 border-dark-600 text-light-400 placeholder:text-dark-400"
+            className="bg-white border-ivory-300 text-navy-700 placeholder:text-navy-400"
           />
         </div>
         <div>
@@ -61,7 +61,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="bg-dark-700 border-dark-600 text-light-400 placeholder:text-dark-400"
+            className="bg-white border-ivory-300 text-navy-700 placeholder:text-navy-400"
           />
         </div>
         <div>
@@ -70,14 +70,14 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
             placeholder="Company (Optional)"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            className="bg-dark-700 border-dark-600 text-light-400 placeholder:text-dark-400"
+            className="bg-white border-ivory-300 text-navy-700 placeholder:text-navy-400"
           />
         </div>
         <Button 
           type="submit"
           disabled={isSubmitting}
           variant={buttonVariant === "outline" ? "outline" : buttonVariant === "subtle" ? "secondary" : "default"}
-          className={`w-full ${buttonVariant === "outline" ? "border-burgundy-800 text-burgundy-800 hover:bg-burgundy-800/10" : buttonVariant === "subtle" ? "bg-burgundy-800/20 text-light-300 hover:bg-burgundy-800/30" : "bg-burgundy-800 text-light-300 hover:bg-burgundy-700"}`}
+          className={`w-full ${buttonVariant === "outline" ? "border-golden text-golden hover:bg-golden-50" : buttonVariant === "subtle" ? "bg-golden-200 text-navy-700 hover:bg-golden-300" : "bg-golden text-white hover:bg-golden-600"}`}
         >
           {isSubmitting ? "Processing..." : "Join Waitlist"}
         </Button>

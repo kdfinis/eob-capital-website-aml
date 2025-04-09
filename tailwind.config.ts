@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,87 +62,46 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Updated EOB Capital specific colors
-				burgundy: {
-					DEFAULT: "#4B0F0F", // Darker burgundy/scarlet
-					50: "#f9e5e5",
-					100: "#f2cccd",
-					200: "#e39a9c",
-					300: "#d5686b",
-					400: "#c03e42",
-					500: "#ab2226",
-					600: "#8c181c",
-					700: "#6d1216",
-					800: "#4B0F0F", // Base scarlet
-					900: "#2e0509",
-					950: "#1a0203",
+				golden: {
+					DEFAULT: "#D4B98A", // Primary golden beige
+					50: "#FAF7F1",
+					100: "#F5EFE3",
+					200: "#EBE0C7",
+					300: "#E0D0AB",
+					400: "#D4B98A", // Base golden beige
+					500: "#C9A86E",
+					600: "#BE9752",
+					700: "#A27B37",
+					800: "#805F2B",
+					900: "#5E451F",
+					950: "#3D2D15",
 				},
 				navy: {
-					DEFAULT: "#1A2942", // Deep navy for contrast
-					50: "#edf0f5",
-					100: "#dce2eb",
-					200: "#bac5d7",
-					300: "#98a9c2",
-					400: "#768dae",
-					500: "#5e739a",
-					600: "#4a5d85",
-					700: "#3a496e",
-					800: "#1A2942", // Base navy
-					900: "#0c1321",
+					DEFAULT: "#22304A", // Refined navy/muted blue
+					50: "#E6EAEF",
+					100: "#CDD5DF",
+					200: "#A5B4C9",
+					300: "#7E94B3",
+					400: "#57749D",
+					500: "#415A7A",
+					600: "#334863",
+					700: "#22304A", // Base navy
+					800: "#192438",
+					900: "#0D1422",
+					950: "#060A11",
 				},
-				forest: {
-					DEFAULT: "#1F3520", // Deep forest green
-					50: "#e9f0e9",
-					100: "#d3e1d4",
-					200: "#a8c4aa",
-					300: "#7ca680",
-					400: "#568959",
-					500: "#3c6c3f",
-					600: "#2d5730",
-					700: "#1F3520", // Base forest
-					800: "#13210d",
-					900: "#071005",
-				},
-				charcoal: {
-					DEFAULT: "#222222", // Dark gray/charcoal
-					50: "#f2f2f2",
-					100: "#e6e6e6",
-					200: "#cccccc",
-					300: "#b3b3b3",
-					400: "#999999",
-					500: "#808080",
-					600: "#666666",
-					700: "#4d4d4d",
-					800: "#333333",
-					900: "#222222", // Base charcoal
-					950: "#0d0d0d",
-				},
-				// Changed from ivory to a darker background color
-				dark: {
-					DEFAULT: "#1A1F2C", // Dark background
-					50: "#f8f9fa",
-					100: "#eaedf2",
-					200: "#d5dbe5",
-					300: "#b0bdd1",
-					400: "#8699b9",
-					500: "#657ba2",
-					600: "#4d6089",
-					700: "#3c4a6d",
-					800: "#2c3651",
-					900: "#1A1F2C", // Base dark
-					950: "#0f121a",
-				},
-				light: {
-					DEFAULT: "#E9EAEC", // Light gray for text on dark
-					100: "#ffffff",
-					200: "#fafafa",
-					300: "#f5f5f5",
-					400: "#f0f0f0",
-					500: "#E9EAEC", // Base light
-					600: "#d1d2d5",
-					700: "#b8babf",
-					800: "#9fa1a8",
-					900: "#868891",
+				ivory: {
+					DEFAULT: "#FAFAF5", // Unified off-white
+					50: "#FFFFFF",
+					100: "#FDFDF9",
+					200: "#FAFAF5", // Base ivory
+					300: "#F1F1E1",
+					400: "#E7E7CD",
+					500: "#DDDCBA",
+					600: "#D3D2A6",
+					700: "#C4C283",
+					800: "#B5B361",
+					900: "#969746",
 				},
 			},
 			borderRadius: {
@@ -161,6 +119,10 @@ export default {
 					to: { height: '0' }
 				},
 				'fade-in': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'fade-in-slow': {
 					'0%': { opacity: '0', transform: 'translateY(10px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
@@ -202,16 +164,17 @@ export default {
 				inter: ['Inter', 'sans-serif'],
 			},
 			boxShadow: {
-				'glow-sm': '0 0 5px rgba(75, 15, 15, 0.3)',
-				'glow-md': '0 0 15px rgba(75, 15, 15, 0.4)',
-				'glow-lg': '0 0 25px rgba(75, 15, 15, 0.5)',
+				'glow-sm': '0 0 5px rgba(212, 185, 138, 0.3)',
+				'glow-md': '0 0 15px rgba(212, 185, 138, 0.4)',
+				'glow-lg': '0 0 25px rgba(212, 185, 138, 0.5)',
 				'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
 				'card-hover': '0 8px 30px rgba(0, 0, 0, 0.12)',
+				'floating': '0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-subtle': 'linear-gradient(to right bottom, rgb(26, 32, 66, 0.8), rgb(75, 15, 15, 0.8))',
-				'dark-gradient': 'linear-gradient(to bottom, #1A1F2C, #0f121a)',
+				'gradient-subtle': 'linear-gradient(to right bottom, rgb(34, 48, 74, 0.8), rgb(212, 185, 138, 0.8))',
+				'light-gradient': 'linear-gradient(to bottom, #FAFAF5, #F1F1E1)',
 			},
 		}
 	},
