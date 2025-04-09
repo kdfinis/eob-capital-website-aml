@@ -27,7 +27,7 @@ const Index: React.FC = () => {
     });
 
     // Set document title
-    document.title = "EOB CAP | Regulatory Infrastructure for Capital";
+    document.title = "EOB Capital | Regulatory Infrastructure for Capital";
     
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -37,7 +37,7 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-dark-900">
       <Navbar />
       
       <main className="flex-grow">
@@ -54,3 +54,4 @@ const Index: React.FC = () => {
 };
 
 export default Index;
+

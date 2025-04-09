@@ -48,16 +48,16 @@ const RegulatorySection: React.FC = () => {
   }, []);
 
   return (
-    <section id="regulatory" className="py-20 px-6 bg-burgundy-800 text-white">
+    <section id="regulatory" className="py-20 px-6 bg-gradient-to-b from-burgundy-950 to-burgundy-900 text-light-500">
       <div 
         ref={sectionRef}
         className="container max-w-6xl mx-auto opacity-0 translate-y-10 transition-all duration-1000 ease-out"
       >
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-garamond mb-4">
+          <h2 className="text-3xl md:text-4xl font-garamond mb-4 text-light-300">
             Regulatory Confidence
           </h2>
-          <p className="text-ivory-100 opacity-90">
+          <p className="text-light-500 opacity-90">
             Built to meet the expectations of European regulators.
           </p>
         </div>
@@ -69,17 +69,17 @@ const RegulatorySection: React.FC = () => {
                 key={index} 
                 className={cn(
                   "flex items-center gap-3 opacity-0 translate-x-4 transition-all duration-500",
-                  "bg-burgundy-700/30 p-4 border border-burgundy-700"
+                  "bg-burgundy-900/60 p-6 border border-burgundy-800 shadow-glow-sm luxury-card"
                 )}
               >
-                <CheckCircle2 size={20} className="text-ivory-200 flex-shrink-0" />
-                <span>{item}</span>
+                <CheckCircle2 size={20} className="text-light-300 flex-shrink-0" />
+                <span className="text-light-400">{item}</span>
               </li>
             ))}
           </ul>
           
-          <div className="mt-12 text-center">
-            <p className="text-ivory-100 opacity-80 italic">
+          <div className="mt-12 text-center p-8 border-t border-burgundy-800/50">
+            <p className="text-light-400 italic">
               "Our infrastructure is built from the ground up to align with European regulatory frameworks."
             </p>
           </div>
